@@ -3,7 +3,7 @@
  * Plugin Name: Header Footer Code Manager
  * Plugin URI: https://draftpress.com/products
  * Description: Header Footer Code Manager by 99 Robots is a quick and simple way for you to add tracking code snippets, conversion pixels, or other scripts required by third party services for analytics, tracking, marketing, or chat functions. For detailed documentation, please visit the plugin's <a href="https://draftpress.com/"> official page</a>.
- * Version: 1.1.11
+ * Version: 1.1.12
  * Author: 99robots
  * Author URI: https://draftpress.com/
  * Disclaimer: Use at your own risk. No warranty expressed or implied is provided.
@@ -965,6 +965,17 @@ if (!class_exists('NNR_HFCM')) :
             $allclass = 'current';
             $snippet_obj = new Hfcm_Snippets_List();
 
+            $is_pro_version_active = self::is_hfcm_pro_active();
+
+            if($is_pro_version_active) {
+                ?>
+                <div class="notice hfcm-warning-notice notice-warning">
+                    Please deactivate the pro version of this plugin in order to avoid duplication of the snippets.
+                    You can use our tools to import all the snippets from the pro version of this plugin.
+                </div>
+                <?php
+            }
+
             if (!empty($_GET['import'])) {
                 if ($_GET['import'] == 2) {
                     $message = "Header Footer Code Manager has successfully imported all snippets and set them as INACTIVE. Please review each snippet individually and ACTIVATE those that are needed for this site. Snippet types that are only available in the PRO version are skipped";
@@ -1076,6 +1087,13 @@ if (!class_exists('NNR_HFCM')) :
         public static function hfcm_import_snippets()
         {
             if (!empty($_FILES['nnr_hfcm_import_file']['tmp_name']) && check_admin_referer('hfcm-nonce')) {
+                if(!empty($_FILES['nnr_hfcm_pro_import_file']['type']) && $_FILES['nnr_hfcm_pro_import_file']['type'] != "application/json") {
+                    ?>
+                    <div class="notice hfcm-warning-notice notice-warning">Please upload a valid import file</div>
+                    <?php
+                    return;
+                }
+
                 global $wpdb;
                 $nnr_hfcm_table_name = $wpdb->prefix . self::$nnr_hfcm_table;
 
@@ -1098,6 +1116,19 @@ if (!class_exists('NNR_HFCM')) :
 
                 self::hfcm_redirect(admin_url('admin.php?page=hfcm-list&import=' . $nnr_non_script_snippets));
             }
+        }
+
+        /**
+         * Check if HFCM Pro is activated
+         *
+         * @return bool
+         */
+        public static function is_hfcm_pro_active(): bool {
+            if ( is_plugin_active( '99robots-header-footer-code-manager-pro/99robots-header-footer-code-manager-pro.php' ) ) {
+                return true;
+            }
+
+            return false;
         }
     }
 
