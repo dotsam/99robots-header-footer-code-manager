@@ -1,7 +1,7 @@
 === Header Footer Code Manager ===
 Contributors: 99robots, charliepatel, DraftPress
 Tags: header, footer, code manager, snippet, functions.php, tracking, google analytics, adsense, verification, pixel
-Requires at least: 4.0
+Requires at least: 4.9
 Tested up to: 5.8
 Stable tag: 1.1.12
 License: GPLv2 or later
