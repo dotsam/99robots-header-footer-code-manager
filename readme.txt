@@ -114,6 +114,7 @@ A. If your script is not supported, just let us know and we'll look into it imme
 == Changelog ==
 = 1.1.12 = 2021-08-16
 * FIXED: Import upload file type error
+* UPDATED: File format for the import/export files
 * UPDATED: Compatibility with WordPress 5.8
 
 = 1.1.11 = 2021-08-10

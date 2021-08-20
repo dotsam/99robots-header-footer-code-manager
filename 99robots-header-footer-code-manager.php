@@ -840,7 +840,11 @@ if (!class_exists('NNR_HFCM')) :
                 );
 
                 foreach ($posts as $pdata) {
+                    $nnr_hfcm_post_title = trim($pdata->post_title);
 
+                    if(empty($nnr_hfcm_post_title)) {
+                        $nnr_hfcm_post_title = "(no title)";
+                    }
                     if (in_array($pdata->ID, $ex_posts)) {
                         $json_output['excluded'][] = $pdata->ID;
                     }
@@ -850,7 +854,7 @@ if (!class_exists('NNR_HFCM')) :
                     }
 
                     $json_output['posts'][] = array(
-                        'text' => sanitize_text_field($pdata->post_title),
+                        'text' => sanitize_text_field($nnr_hfcm_post_title),
                         'value' => $pdata->ID,
                     );
                 }
