@@ -112,8 +112,9 @@ A. Free plugins rely on user feedback. Therefore, the best thing you can do for 
 A. If your script is not supported, just let us know and we'll look into it immediately. We will do our best to ensure all reputable services are supported. When requesting support for a particular script, it would be nice to get a sample of the script so that we can see its structure.
 
 == Changelog ==
-= 1.1.12 = 2021-08-16
+= 1.1.12 = 2021-08-30
 * FIXED: Import upload file type error
+* FIXED: Location options for site display (specific categories)
 * UPDATED: File format for the import/export files
 * UPDATED: Compatibility with WordPress 5.8
 
